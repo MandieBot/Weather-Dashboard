@@ -12,7 +12,7 @@ var todayForecast = document.getElementById("current-forecast");
 //30.2711286 - lat
 //-97.7436995 - lon
 
-var weatherApi = "https://api.openweathermap.org/data/3.0/onecall?";
+var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?";
 
 var apiKey = "f18a21a46c14735a21d43be4f3afb792";
 
@@ -57,7 +57,8 @@ function grabWeather(lat, lon) {
 
       var h1El = document.createElement("h1");
 
-      h1El.textContent;
+      h1El.textContent = data.list[0].main.temp;
+      todayForecast.append(h1El);
 
       //create an h1 element dynamically
       //add text to that element
