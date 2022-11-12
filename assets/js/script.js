@@ -19,9 +19,13 @@ var apiKey = "f18a21a46c14735a21d43be4f3afb792";
 
 //responsible for getting the lat and lon for the city passed
 function grabCoordinates(city) {
-  //this will make the call to get the coordinates for that city
+  var rootEndpoint = "http://api.openweathermap.org/geo/1.0/direct";
 
-  var apiCall = "http://api.openweathermap.org/geo/1.0/direct?q=austin&appid=f18a21a46c14735a21d43be4f3afb792";
+  var apiCall = rootEndpoint + "?q=" + city + "&appid=" + apiKey;
+
+  console.log(apiCall);
+
+  //this will make the call to get the coordinates for that city
 
   fetch(apiCall)
     .then(function (response) {
@@ -36,21 +40,21 @@ function grabCoordinates(city) {
 
 //responsible for making api call with the user search term
 function grabWeather(lat, lon) {
-  console.log(lat);
-  console.log(lon);
+  // console.log(lat);
+  // console.log(lon);
+
+  var apiCall = weatherApi + "lat=" + lat + "&lon=" + lon + "&units=imperial&" + "appid=f18a21a46c14735a21d43be4f3afb792";
+
+  fetch(apiCall)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // console.log(data);
+    });
+
+  //   //render the temp as an h1 to the user
 }
-var apiCall = weatherApi + "lat=30.2711286&" + "lon=-97.7436995&" + "units=imperial&" + "appid=f18a21a46c14735a21d43be4f3afb792";
-
-fetch(apiCall)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-  });
-
-//   //render the temp as an h1 to the user
-
 // //responsible for form submission by capturing user input
 function runSearch(e) {
   e.preventDefault();
