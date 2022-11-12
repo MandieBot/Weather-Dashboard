@@ -54,7 +54,7 @@ function grabWeather(lat, lon) {
     .then(function (data) {
       // console.log(data);
       showDayForecast(data);
-      show5Day(data);
+      // show5Day(data);
 
       // console.log(data.list[0].main.temp);
 
@@ -106,7 +106,7 @@ function showDayForecast(data) {
   img.src = data.list[0].weather.icon;
   todayForecast.append(img);
 
-  // show5Day(data);
+  show5Day(data);
 }
 
 function show5Day(data) {
@@ -114,7 +114,19 @@ function show5Day(data) {
   for (let i = 1; i < data.list.length; i += 8) {
     console.log(data.list[i]);
     var date = document.getElementById(`date${i}`);
+    // console.log(date);
+    var icon = document.getElementById(`icon${i}`);
+    var temp = document.getElementById(`temp${i}`);
+    var wind = document.getElementById(`wind${i}`);
+    var humidity = document.getElementById(`humidity${i}`);
+    date.textContent = data.list[i].dt_txt;
     console.log(date);
+    temp.textContent = `Temperature: ${data.list[i].main.temp}`;
+    console.log(temp);
+    wind.textContent = `Wind Speed(MPH): ${data.list[i].wind.speed}`;
+    console.log(wind);
+    humidity.textContent = `Humidity: ${data.list[i].main.humidity}`;
+    console.log(humidity);
   }
 }
 
