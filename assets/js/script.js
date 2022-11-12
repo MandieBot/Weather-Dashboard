@@ -3,6 +3,7 @@ var fieldInput = document.getElementById("city-input");
 
 var searchBtn = document.getElementById("search-form");
 
+var todayForecast = document.getElementById("current-forecast");
 // https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
 //api key = f18a21a46c14735a21d43be4f3afb792
@@ -50,11 +51,23 @@ function grabWeather(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-      // console.log(data);
+      console.log(data);
+
+      //take the temp and display to the user as an h1
+
+      var h1El = document.createElement("h1");
+
+      h1El.textContent;
+
+      //create an h1 element dynamically
+      //add text to that element
+      //append to DOM
     });
 
   //   //render the temp as an h1 to the user
 }
+
+function showTodayForecast() {}
 // //responsible for form submission by capturing user input
 function runSearch(e) {
   e.preventDefault();
