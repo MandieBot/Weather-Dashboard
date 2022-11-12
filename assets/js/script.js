@@ -24,7 +24,7 @@ function grabCoordinates(city) {
 
   var apiCall = rootEndpoint + "?q=" + city + "&appid=" + apiKey;
 
-  console.log(apiCall);
+  // console.log(apiCall);
 
   //this will make the call to get the coordinates for that city
 
@@ -33,6 +33,7 @@ function grabCoordinates(city) {
       return response.json();
     })
     .then(function (data) {
+      // console.log(data);
       var lat = data[0].lat;
       var lon = data[0].lon;
       grabWeather(lat, lon);
@@ -51,31 +52,79 @@ function grabWeather(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      // console.log(data);
+      showDayForecast(data);
+      show5Day(data);
+
+      // console.log(data.list[0].main.temp);
 
       //take the temp and display to the user as an h1
 
-      var h1El = document.createElement("h1");
+      // var h1El = document.createElement("h1");
 
-      h1El.textContent = data.list[0].main.temp;
-      todayForecast.append(h1El);
+      // h1El.textContent = data.list[0].main.temp;
+      // todayForecast.append(h1El);
 
       //create an h1 element dynamically
       //add text to that element
       //append to DOM
     });
 
-  //   //render the temp as an h1 to the user
+  //render the temp as an h1 to the user
 }
 
-function showTodayForecast() {}
+function showDayForecast(data) {
+  // console.log(data);
+  // console.log(data.city.name);
+  // console.log(data.list);
+  // console.log(data.list[0].dt_txt);
+  // console.log(data.list[0].wind.speed);
+  // console.log(data.list[0].main.humidity);
+
+  var h1Name = document.createElement("h1");
+  var h1Date = document.createElement("h1");
+  var h1Temp = document.createElement("h1");
+  var h1Wind = document.createElement("h1");
+  var h1Humidity = document.createElement("h1");
+  var img = document.createElement("img");
+
+  h1Name.textContent = data.city.name;
+  todayForecast.append(h1Name);
+
+  h1Date.textContent = data.list[0].dt_txt;
+  todayForecast.append(h1Date);
+
+  h1Temp.textContent = data.list[0].main.temp;
+  todayForecast.append(h1Temp);
+
+  h1Wind.textContent = data.list[0].wind.speed;
+  todayForecast.append(h1Wind);
+
+  h1Humidity.textContent = data.list[0].main.humidity;
+  todayForecast.append(h1Humidity);
+
+  img.src = data.list[0].weather.icon;
+  todayForecast.append(img);
+
+  // show5Day(data);
+}
+
+function show5Day(data) {
+  console.log(data);
+  for (let i = 1; i < data.list.length; i += 8) {
+    console.log(data.list[i]);
+    var date = document.getElementById(`date${i}`);
+    console.log(date);
+  }
+}
+
 // //responsible for form submission by capturing user input
 function runSearch(e) {
   e.preventDefault();
   var field = fieldInput.value;
 
   //make an api call with that search term and confirm data is sent back
-  grabWeather(field);
+  // grabWeather(field);
   grabCoordinates(field);
 }
 
