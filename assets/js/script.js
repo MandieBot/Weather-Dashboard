@@ -4,13 +4,12 @@ var fieldInput = document.getElementById("city-input");
 var searchBtn = document.getElementById("search-form");
 
 var todayForecast = document.getElementById("current-forecast");
+
+// var cardBody = document.querySelectorAll(".card-body)");
+
 // https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
 //api key = f18a21a46c14735a21d43be4f3afb792
-
-//test Austin
-//30.2711286 - lat
-//-97.7436995 - lon
 
 var weatherApi = "https://api.openweathermap.org/data/2.5/forecast?";
 
@@ -23,8 +22,6 @@ function grabCoordinates(city) {
   var rootEndpoint = "http://api.openweathermap.org/geo/1.0/direct";
 
   var apiCall = rootEndpoint + "?q=" + city + "&appid=" + apiKey;
-
-  // console.log(apiCall);
 
   //this will make the call to get the coordinates for that city
 
@@ -60,11 +57,6 @@ function grabWeather(lat, lon) {
 
       //take the temp and display to the user as an h1
 
-      // var h1El = document.createElement("h1");
-
-      // h1El.textContent = data.list[0].main.temp;
-      // todayForecast.append(h1El);
-
       //create an h1 element dynamically
       //add text to that element
       //append to DOM
@@ -80,6 +72,7 @@ function showDayForecast(data) {
   // console.log(data.list[0].dt_txt);
   // console.log(data.list[0].wind.speed);
   // console.log(data.list[0].main.humidity);
+  var weatherIcon = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}.png`;
 
   var h1Name = document.createElement("h1");
   var h1Date = document.createElement("h1");
@@ -103,30 +96,33 @@ function showDayForecast(data) {
   h1Humidity.textContent = data.list[0].main.humidity;
   todayForecast.append(h1Humidity);
 
-  img.src = data.list[0].weather.icon;
+  img.src = weatherIcon;
   todayForecast.append(img);
 
   show5Day(data);
 }
 
 function show5Day(data) {
+  // var weatherIcon = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}.png`;
   console.log(data);
   for (let i = 1; i < data.list.length; i += 8) {
     console.log(data.list[i]);
+    var img = document.createElement("img");
     var date = document.getElementById(`date${i}`);
-    // console.log(date);
     var icon = document.getElementById(`icon${i}`);
     var temp = document.getElementById(`temp${i}`);
     var wind = document.getElementById(`wind${i}`);
     var humidity = document.getElementById(`humidity${i}`);
     date.textContent = data.list[i].dt_txt;
     console.log(date);
-    temp.textContent = `Temperature: ${data.list[i].main.temp}`;
+    temp.textContent = `Temperature(F): ${data.list[i].main.temp}`;
     console.log(temp);
     wind.textContent = `Wind Speed(MPH): ${data.list[i].wind.speed}`;
     console.log(wind);
     humidity.textContent = `Humidity: ${data.list[i].main.humidity}`;
     console.log(humidity);
+    // img.src = weatherIcon;
+    // cardBody.append(img);
   }
 }
 
@@ -136,8 +132,16 @@ function runSearch(e) {
   var field = fieldInput.value;
 
   //make an api call with that search term and confirm data is sent back
-  // grabWeather(field);
   grabCoordinates(field);
+  storageSet(field);
+}
+
+function storageSet(city) {
+  console.log(city);
+  localStorage.setItem("city", city);
+}
+function storageGet() {
+  localStorage.getItem("city");
 }
 
 // //EVENT LISTENERS
