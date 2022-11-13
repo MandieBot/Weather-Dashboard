@@ -84,6 +84,9 @@ function showDayForecast(data) {
   h1Name.textContent = data.city.name;
   todayForecast.append(h1Name);
 
+  img.src = weatherIcon;
+  todayForecast.append(img);
+
   h1Date.textContent = data.list[0].dt_txt;
   todayForecast.append(h1Date);
 
@@ -95,9 +98,6 @@ function showDayForecast(data) {
 
   h1Humidity.textContent = data.list[0].main.humidity;
   todayForecast.append(h1Humidity);
-
-  img.src = weatherIcon;
-  todayForecast.append(img);
 
   show5Day(data);
 }
@@ -146,3 +146,8 @@ function storageGet() {
 
 // //EVENT LISTENERS
 searchBtn.addEventListener("submit", runSearch);
+
+//LOCAL STORAGE
+//create an empty array in global scope
+//push that value (city name) to that array as they type it in
+//["austin", "denver", "seattle"]

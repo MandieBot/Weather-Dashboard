@@ -13,28 +13,27 @@
     />
   </head>
   <body>
-    <header class="container-fluid text-center text-black bg-light p-2">
+    <header class="container-fluid text-center text-dark bg-light p-2 mb-4">
       <h1>Weather Dashboard</h1>
     </header>
-    <main class="container-fluid">
+    <main class="container-fluid text-center mb-2">
       <div class="row">
-        <aside class="col-lg-2">
+        <aside class="col-lg-3">
           <h2>Search by City:</h2>
           <form id="search-form">
-            <div class="mb-3">
+            <div class="mb-2">
               <input type="text" class="form-control" id="city-input" aria-describedby="cityInput" />
             </div>
-            <button type="submit" class="btn btn-info w-100">Search</button>
+            <button type="submit" class="btn btn-warning w-100">Search</button>
           </form>
         </aside>
-        <section id="current-forecast">
-          <div class="card">
-            <div class="card-body text-center">Today's Forecast:</div>
-          </div>
+        <section class="col-lg-4 border border-dark"  id="current-forecast">        
         </section>
-        <section id="five-day">
+      </div>  
+      <div class="row">
+        <section class="container-fluid d-flex align-items-end">
           <div class="card">
-            <div class="card-body text-center">
+            <div class="card-body text-center text-white bg-secondary border border-white">
               <p id="date1" class=></p>
               <p id="icon1"></p>
               <p id="temp1"></p>
@@ -43,7 +42,7 @@
             </div>
           </div>
           <div class="card">
-            <div class="card-body text-center">
+            <div class="card-body text-center text-white bg-secondary border border-white">
               <p id="date9"></p>
               <p id="icon9"></p>
               <p id="temp9"></p>
@@ -52,7 +51,7 @@
             </div>
           </div>
           <div class="card">
-            <div class="card-body text-center">
+            <div class="card-body text-center text-white bg-secondary border border-white">
               <p id="date17"></p>
               <p id="icon17"></p>
               <p id="temp17"></p>
@@ -61,7 +60,7 @@
             </div>
           </div>
           <div class="card">
-            <div class="card-body text-center">
+            <div class="card-body text-center text-white bg-secondary border border-white">
               <p id="date25"></p>
               <p id="icon25"></p>
               <p id="temp25"></p>
@@ -70,7 +69,7 @@
             </div>
           </div>
           <div class="card">
-            <div class="card-body text-center">
+            <div class="card-body text-center text-white bg-secondary border border-white">
               <p id="date33"></p>
               <p id="icon33"></p>
               <p id="temp33"></p>
