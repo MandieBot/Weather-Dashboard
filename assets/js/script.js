@@ -1,11 +1,10 @@
 //VARIABLE DECLARATIONS
+
 var fieldInput = document.getElementById("city-input");
 
 var searchBtn = document.getElementById("search-button");
 
 var todayForecast = document.getElementById("current-forecast");
-
-// var cardBody = document.querySelectorAll(".card-body)");
 
 // https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
@@ -18,6 +17,7 @@ var apiKey = "f18a21a46c14735a21d43be4f3afb792";
 //FUNCTIONS
 
 //responsible for getting the lat and lon for the city passed
+
 function grabCoordinates(city) {
   var rootEndpoint = "http://api.openweathermap.org/geo/1.0/direct";
 
@@ -30,7 +30,6 @@ function grabCoordinates(city) {
       return response.json();
     })
     .then(function (data) {
-      // console.log(data);
       var lat = data[0].lat;
       var lon = data[0].lon;
       grabWeather(lat, lon);
@@ -38,10 +37,8 @@ function grabCoordinates(city) {
 }
 
 //responsible for making api call with the user search term
-function grabWeather(lat, lon) {
-  // console.log(lat);
-  // console.log(lon);
 
+function grabWeather(lat, lon) {
   var apiCall = weatherApi + "lat=" + lat + "&lon=" + lon + "&units=imperial&" + "appid=f18a21a46c14735a21d43be4f3afb792";
 
   fetch(apiCall)
@@ -51,16 +48,9 @@ function grabWeather(lat, lon) {
     .then(function (data) {
       // console.log(data);
       showDayForecast(data);
-
-      //take the temp and display to the user as an h1
-
-      //create an h1 element dynamically
-      //add text to that element
-      //append to DOM
     });
-
-  //render the temp as an h1 to the user
 }
+//responsible for showing the current day forecast
 
 function showDayForecast(data) {
   // console.log(data);
@@ -99,8 +89,9 @@ function showDayForecast(data) {
   show5Day(data);
 }
 
+//responsible for showing the 5 day forecast
+
 function show5Day(data) {
-  // var weatherIcon = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}.png`;
   console.log(data);
   for (let i = 1; i < data.list.length; i += 8) {
     console.log(data.list[i]);
@@ -118,20 +109,22 @@ function show5Day(data) {
     console.log(wind);
     humidity.textContent = `Humidity: ${data.list[i].main.humidity}`;
     console.log(humidity);
-    // img.src = weatherIcon;
-    // cardBody.append(img);
   }
 }
 
-// //responsible for form submission by capturing user input
+//responsible for form submission by capturing user input
+
 function runSearch(e) {
   e.preventDefault();
   var field = fieldInput.value;
 
   //make an api call with that search term and confirm data is sent back
+
   grabCoordinates(field);
   storageSet(field);
 }
+
+//LOCAL STORAGE
 
 var recentCity = [];
 
@@ -148,15 +141,15 @@ function storageGet() {
 var recent = document.getElementById("recentBtnContainer");
 
 function createButtons(recentCity) {
-  // recentCity = storageGet("city");
+  recent.textContent = "";
   for (let i = 0; i < recentCity.length; i++) {
-    // recentCity = storageGet("city");
-    // console.log(recentCity);
     var storageButton = document.createElement("button");
     storageButton.textContent = recentCity[i];
     recent.appendChild(storageButton);
   }
 }
-// createButtons();
-// //EVENT LISTENERS
-searchBtn.addEventListener("submit", runSearch);
+
+//EVENT LISTENERS
+
+searchBtn.addEventListener("click", runSearch);
+storageButton.addEventListener("click", runSearch);
