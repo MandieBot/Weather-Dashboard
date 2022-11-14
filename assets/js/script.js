@@ -1,7 +1,7 @@
 //VARIABLE DECLARATIONS
 var fieldInput = document.getElementById("city-input");
 
-var searchBtn = document.getElementById("search-form");
+var searchBtn = document.getElementById("search-button");
 
 var todayForecast = document.getElementById("current-forecast");
 
@@ -51,9 +51,6 @@ function grabWeather(lat, lon) {
     .then(function (data) {
       // console.log(data);
       showDayForecast(data);
-      // show5Day(data);
-
-      // console.log(data.list[0].main.temp);
 
       //take the temp and display to the user as an h1
 
@@ -142,6 +139,7 @@ function storageSet(city) {
   console.log(city);
   recentCity.push(city);
   localStorage.setItem("city", JSON.stringify(recentCity));
+  createButtons(recentCity);
 }
 function storageGet() {
   localStorage.getItem("city");
@@ -149,21 +147,16 @@ function storageGet() {
 
 var recent = document.getElementById("recentBtnContainer");
 
-function createButtons() {
-  recentCity = storageGet("city");
+function createButtons(recentCity) {
+  // recentCity = storageGet("city");
   for (let i = 0; i < recentCity.length; i++) {
     // recentCity = storageGet("city");
     // console.log(recentCity);
     var storageButton = document.createElement("button");
     storageButton.textContent = recentCity[i];
-    recentBtnContainer.append = storageButton;
+    recent.appendChild(storageButton);
   }
 }
-createButtons();
+// createButtons();
 // //EVENT LISTENERS
 searchBtn.addEventListener("submit", runSearch);
-
-//LOCAL STORAGE
-//create an empty array in global scope
-//push that value (city name) to that array as they type it in
-//["austin", "denver", "seattle"]
