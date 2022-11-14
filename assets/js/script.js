@@ -136,16 +136,30 @@ function runSearch(e) {
   storageSet(field);
 }
 
+var recentCity = [];
+
 function storageSet(city) {
   console.log(city);
-  let recentCity = [];
   recentCity.push(city);
-  localStorage.setItem("city", city);
+  localStorage.setItem("city", JSON.stringify(recentCity));
 }
 function storageGet() {
   localStorage.getItem("city");
 }
 
+var recent = document.getElementById("recentBtnContainer");
+
+function createButtons() {
+  recentCity = storageGet("city");
+  for (let i = 0; i < recentCity.length; i++) {
+    // recentCity = storageGet("city");
+    // console.log(recentCity);
+    var storageButton = document.createElement("button");
+    storageButton.textContent = recentCity[i];
+    recentBtnContainer.append = storageButton;
+  }
+}
+createButtons();
 // //EVENT LISTENERS
 searchBtn.addEventListener("submit", runSearch);
 
