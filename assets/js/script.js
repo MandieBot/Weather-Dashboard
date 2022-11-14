@@ -138,6 +138,8 @@ function runSearch(e) {
 
 function storageSet(city) {
   console.log(city);
+  let recentCity = [];
+  recentCity.push(city);
   localStorage.setItem("city", city);
 }
 function storageGet() {
