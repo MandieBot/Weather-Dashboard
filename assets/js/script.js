@@ -140,19 +140,19 @@ function storageGet() {
 }
 
 var recent = document.getElementById("recentBtnContainer");
-var storageButton;
+// var storageButton = document.createElement("button");
 
 function createButtons(recentCity) {
   recent.textContent = "";
   for (let i = 0; i < recentCity.length; i++) {
-    storageButton = document.createElement("button");
+    var storageButton = document.createElement("button");
     storageButton.textContent = recentCity[i];
     recent.appendChild(storageButton);
-    // storageButton.addEventListener("click", runSearch);
+    storageButton.addEventListener("click", runSearch);
   }
 }
 
 //EVENT LISTENERS
 
 searchBtn.addEventListener("click", runSearch);
-storageButton.addEventListener("click", runSearch);
+// storageButton.addEventListener("click", runSearch);
