@@ -122,6 +122,7 @@ function runSearch(e) {
 
   grabCoordinates(field);
   storageSet(field);
+  console.log("test");
 }
 
 //LOCAL STORAGE
@@ -139,13 +140,15 @@ function storageGet() {
 }
 
 var recent = document.getElementById("recentBtnContainer");
+var storageButton;
 
 function createButtons(recentCity) {
   recent.textContent = "";
   for (let i = 0; i < recentCity.length; i++) {
-    var storageButton = document.createElement("button");
+    storageButton = document.createElement("button");
     storageButton.textContent = recentCity[i];
     recent.appendChild(storageButton);
+    // storageButton.addEventListener("click", runSearch);
   }
 }
 
