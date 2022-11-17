@@ -19,7 +19,7 @@ var apiKey = "f18a21a46c14735a21d43be4f3afb792";
 //responsible for getting the lat and lon for the city passed
 
 function grabCoordinates(city) {
-  var rootEndpoint = "http://api.openweathermap.org/geo/1.0/direct";
+  var rootEndpoint = "https://api.openweathermap.org/geo/1.0/direct";
 
   var apiCall = rootEndpoint + "?q=" + city + "&appid=" + apiKey;
 
@@ -122,7 +122,7 @@ function runSearch(e) {
 
   grabCoordinates(field);
   storageSet(field);
-  console.log("test");
+  // console.log("test");
 }
 
 //LOCAL STORAGE
@@ -148,9 +148,15 @@ function createButtons(recentCity) {
     var storageButton = document.createElement("button");
     storageButton.textContent = recentCity[i];
     recent.appendChild(storageButton);
-    storageButton.addEventListener("click", runSearch);
+    // storageButton.addEventListener("click", runSearch);
   }
 }
+
+// function pastCity(e) {
+//   e.preventDefault();
+//   var field = this.textContent;
+//   grabCoordinates(field);
+// }
 
 //EVENT LISTENERS
 
