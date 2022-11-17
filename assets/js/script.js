@@ -53,6 +53,7 @@ function grabWeather(lat, lon) {
 //responsible for showing the current day forecast
 
 function showDayForecast(data) {
+  todayForecast.textContent = "";
   // console.log(data);
   // console.log(data.city.name);
   // console.log(data.list);
@@ -124,7 +125,13 @@ function runSearch(e) {
   storageSet(field);
   // console.log("test");
 }
+function pastCity(e) {
+  e.preventDefault();
+  var field = this.textContent;
+  grabCoordinates(field);
 
+  //make an api call with that search term and confirm data is sent back
+}
 //LOCAL STORAGE
 
 var recentCity = [];
@@ -140,7 +147,6 @@ function storageGet() {
 }
 
 var recent = document.getElementById("recentBtnContainer");
-// var storageButton = document.createElement("button");
 
 function createButtons(recentCity) {
   recent.textContent = "";
@@ -148,17 +154,10 @@ function createButtons(recentCity) {
     var storageButton = document.createElement("button");
     storageButton.textContent = recentCity[i];
     recent.appendChild(storageButton);
-    // storageButton.addEventListener("click", runSearch);
+    storageButton.addEventListener("click", pastCity);
   }
 }
-
-// function pastCity(e) {
-//   e.preventDefault();
-//   var field = this.textContent;
-//   grabCoordinates(field);
-// }
 
 //EVENT LISTENERS
 
 searchBtn.addEventListener("click", runSearch);
-// storageButton.addEventListener("click", runSearch);
